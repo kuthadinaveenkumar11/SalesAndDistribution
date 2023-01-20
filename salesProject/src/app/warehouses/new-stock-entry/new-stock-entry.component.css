@@ -1,0 +1,9 @@
+ body{
+    background-image:url("https://wallpapercave.com/wp/wp3702631.jpg");
+  }
+  .ok{
+    padding-left: 40%;
+    padding-top: 8%;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    border-style:dashed;
+  }

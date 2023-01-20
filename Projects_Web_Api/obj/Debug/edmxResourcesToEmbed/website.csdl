@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="EcomDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="distributer_profile">
+    <Key>
+      <PropertyRef Name="PANNo" />
+    </Key>
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ContactNumber" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="FirmName" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="TINNo" Type="Int32" Nullable="false" />
+    <Property Name="PANNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="BankIFSCCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="BankAccountNumber" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+    <NavigationProperty Name="distributerlogin" Relationship="Self.FK__distribut__PANNo__2E1BDC42" FromRole="distributer_profile" ToRole="distributerlogin" />
+  </EntityType>
+  <EntityType Name="distributerlogin">
+    <Key>
+      <PropertyRef Name="PANNo" />
+    </Key>
+    <Property Name="username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="PANNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="distributer_profile" Relationship="Self.FK__distribut__PANNo__2E1BDC42" FromRole="distributerlogin" ToRole="distributer_profile" />
+  </EntityType>
+  <EntityType Name="Product">
+    <Key>
+      <PropertyRef Name="Product_id" />
+    </Key>
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Product_id" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Price" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Image" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+    <Property Name="Quantity" Type="Int32" Nullable="false" />
+  </EntityType>
+  <Association Name="FK__distribut__PANNo__2E1BDC42">
+    <End Role="distributer_profile" Type="Self.distributer_profile" Multiplicity="1" />
+    <End Role="distributerlogin" Type="Self.distributerlogin" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="distributer_profile">
+        <PropertyRef Name="PANNo" />
+      </Principal>
+      <Dependent Role="distributerlogin">
+        <PropertyRef Name="PANNo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="EcomDBEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="distributer_profiles" EntityType="Self.distributer_profile" />
+    <EntitySet Name="distributerlogins" EntityType="Self.distributerlogin" />
+    <EntitySet Name="Products" EntityType="Self.Product" />
+    <AssociationSet Name="FK__distribut__PANNo__2E1BDC42" Association="Self.FK__distribut__PANNo__2E1BDC42">
+      <End Role="distributer_profile" EntitySet="distributer_profiles" />
+      <End Role="distributerlogin" EntitySet="distributerlogins" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

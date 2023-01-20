@@ -1,0 +1,17 @@
+<p>
+    <mat-toolbar color="primary">
+      <span>Distributor Home Page</span>
+      <span class="example-spacer"></span>
+        <div class="example-button-row">
+          <!-- <button  mat-button routerLink="/Distributor">Home</button>&nbsp; -->
+          <button mat-button routerLink="/Distributor/my-profile">My Profile</button>&nbsp;
+          <button mat-button routerLink="/Distributor/products">Products</button>&nbsp;
+          <!-- <button >Purchase Orders</button> -->
+          <button  mat-button  routerLink="/Distributor/purchase-order">Purchase Orders</button>&nbsp;
+          <button mat-button routerLink="/Distributor/stock">Stock</button>&nbsp;
+          <button mat-button routerLink=""><mat-icon  id="logout-btn">logout</mat-icon></button>
+          
+        </div>
+    </mat-toolbar>
+  </p>
+  <router-outlet></router-outlet>

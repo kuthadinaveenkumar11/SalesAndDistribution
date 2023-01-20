@@ -1,0 +1,10 @@
+<div class="container">
+    <ng-container *ngFor="let item of productlist">
+        <img src={{item.image}}>
+        <h2>{{item.Name}}</h2>
+        <p>{{item.Discription}}</p>
+        <p>Category: {{item.Type}}</p>
+        <p>Price: {{item.Price | currency:'INR'}}</p>
+        <p>Quantity: {{item.Quantity}}</p>
+    </ng-container>
+</div>

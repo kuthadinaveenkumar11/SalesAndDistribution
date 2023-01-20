@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="EcomDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="distributer profile">
+    <Key>
+      <PropertyRef Name="PANNo" />
+    </Key>
+    <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="ContactNumber" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="FirmName" Type="nchar" MaxLength="10" />
+    <Property Name="Address" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="TINNo" Type="int" Nullable="false" />
+    <Property Name="PANNo" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="BankIFSCCode" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="BankAccountNumber" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+  </EntityType>
+  <EntityType Name="distributerlogin">
+    <Key>
+      <PropertyRef Name="PANNo" />
+    </Key>
+    <Property Name="username" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="password" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="PANNo" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Product">
+    <Key>
+      <PropertyRef Name="Product_id" />
+    </Key>
+    <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Product_id" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Price" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="Type" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Description" Type="nvarchar" MaxLength="1000" Nullable="false" />
+    <Property Name="Image" Type="varbinary(max)" Nullable="false" />
+    <Property Name="Quantity" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="FK__distribut__PANNo__2E1BDC42">
+    <End Role="distributer profile" Type="Self.distributer profile" Multiplicity="1" />
+    <End Role="distributerlogin" Type="Self.distributerlogin" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="distributer profile">
+        <PropertyRef Name="PANNo" />
+      </Principal>
+      <Dependent Role="distributerlogin">
+        <PropertyRef Name="PANNo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="EcomDBModelStoreContainer">
+    <EntitySet Name="distributer profile" EntityType="Self.distributer profile" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="distributerlogin" EntityType="Self.distributerlogin" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__distribut__PANNo__2E1BDC42" Association="Self.FK__distribut__PANNo__2E1BDC42">
+      <End Role="distributer profile" EntitySet="distributer profile" />
+      <End Role="distributerlogin" EntitySet="distributerlogin" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

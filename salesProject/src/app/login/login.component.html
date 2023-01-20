@@ -1,0 +1,112 @@
+<mat-toolbar class="bg">
+    <span><img src="https://media.istockphoto.com/id/1345389715/vector/abstract-black-scorpio.jpg?s=612x612&w=0&k=20&c=WqUxGMnxukfklsKvEzJvOCe916YdUrlFXavmkgUdfdk=" width="40px"> </span>
+    <span class="note">WELCOME TO SALES &amp; DISTRIBUTION APPLICATION</span>
+    <span class="example-spacer"></span>
+    <span>{{currentDate | date:'yyyy-MM-dd'}}</span>
+    
+    <!-- <button  mat-button [matMenuTriggerFor]="menu">
+    <mat-icon>menu</mat-icon>
+  </button> -->
+</mat-toolbar>
+<form [formGroup]="loginform" >
+
+<section class="vh-100 gradient-custom" >
+    <div class="container py-5 h-100" >
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+
+          <div class="card bg-dark text-white" style="border-radius: 1rem;">
+
+            <div class="card-body p-5 text-center">
+                <!-- <h1><p>{{selected}}</p></h1> -->
+
+              <div class="mb-md-5 mt-md-4 pb-5">
+  
+                <h2 class="fw-bold mb-2 text-uppercase">{{selected}} Login</h2>
+                <p class="text-white-50 mb-5">Please enter your Username and password!</p>
+                <div class="option">
+                    <label class="form-label" >Select The User Type</label><br>
+
+                    <mat-form-field appearance="fill" >
+                        <!-- <mat-label>Select The User Type</mat-label>  -->
+                        <mat-select [(value)]="selected" formControlName="dis" >
+                        <mat-option>None</mat-option>
+                        <mat-option value="Distributor" (click)="Distributor()">Distributor</mat-option>
+                        <mat-option value="Authorizer" (click)="Authorizer()">Authorizer</mat-option>
+                        <mat-option value="Warehouse" (click)="Warehouse()">Warehouse</mat-option>
+                        <mat-option value="Admin"  (click)="Admin()">Admin</mat-option>
+            
+                        </mat-select>
+
+                    </mat-form-field>
+
+                </div>
+
+                <div class="form-outline form-white mb-4">
+                  <input type="text" id="typeEmailX" class="form-control form-control-lg" placeholder="{{changing}}"  formControlName="Uname"/>
+                  <label class="form-label" for="typeEmailX">Username</label>
+                </div>
+  
+                <div class="form-outline form-white mb-4">
+                  <input type="password" id="typePasswordX" class="form-control form-control-lg" placeholder="{{passwordchanging}}"  formControlName="Pssword"/>
+                  <label class="form-label" for="typePasswordX">Password</label>
+                </div>
+  
+                <p class="small mb-5 pb-lg-2"><a class="text-white-50" href="#!">Forgot password?</a></p>
+  
+                <button class="btn btn-outline-light btn-lg px-5" type="submit" (click)="onClick()">Login</button>
+
+                <div>
+                  <p class="mb-0">Don't have an account? <a href="#!" class="text-white-50 fw-bold" (click)="register()" >Sign Up</a>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</form>
+<!-- 
+<form [formGroup]="loginform">
+    <mat-menu #menu="matMenu">
+        <button mat-menu-item (click)="Distributor()"  ngDefaultControl formControlName="dis"><mat-icon>add_shopping_cart</mat-icon>Distributor</button>
+        <button mat-menu-item (click)="Authorizer()" ngDefaultControl formControlName="dis"><mat-icon>account_circle</mat-icon>Authorizer</button>
+        <button mat-menu-item (click)="Warehouse()" ngDefaultControl formControlName="dis"><mat-icon>shopping_cart</mat-icon>Warehouse</button>         
+        <button mat-menu-item (click)="Admin()" ngDefaultControl formControlName="dis"><mat-icon>supervised_user_circle</mat-icon>Admin</button>
+    </mat-menu> 
+    <div class="option">
+        <mat-form-field appearance="fill" >
+            <mat-label>Select The User Type</mat-label>
+            <mat-select [(value)]="selected" formControlName="dis" >
+            <mat-option>None</mat-option>
+            <mat-option value="Distributor" (click)="Distributor()">Distributor</mat-option>
+            <mat-option value="Authorizer" (click)="Authorizer()">Authorizer</mat-option>
+            <mat-option value="Warehouse" (click)="Warehouse()">Warehouse</mat-option>
+            <mat-option value="Admin" (click)="Admin()">Admin</mat-option>
+
+            </mat-select>
+        </mat-form-field>
+    </div>
+
+
+    <div class="login_page">
+
+
+          
+          <h1><p>{{selected}}</p></h1>
+        <mat-form-field class="example-full-width">
+            <mat-label>Email*</mat-label>
+            <input type="email" matInput placeholder="{{changing}}"  formControlName="Uname">
+        </mat-form-field><br>
+        <mat-form-field class="example-full-width">
+            <mat-label>Password*</mat-label>
+            <input type="password" matInput placeholder="{{passwordchanging}}"  formControlName="Pssword">
+        </mat-form-field><br> 
+        <button mat-raised-button color="primary"   (click)="onClick()">Login</button>&nbsp;
+        <a href="#">Forget Password</a><br><br>
+        <button mat-raised-button color="primary" (click)="register()" [disabled]="disabled">Registration</button>
+        
+    </div>
+</form> -->

@@ -1,0 +1,133 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="scorpioDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="distributer profile">
+    <Key>
+      <PropertyRef Name="PANNo" />
+    </Key>
+    <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="ContactNumber" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="FirmName" Type="nchar" MaxLength="10" />
+    <Property Name="Address" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="TINNo" Type="int" Nullable="false" />
+    <Property Name="PANNo" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="BankIFSCCode" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="BankAccountNumber" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'scorpioDB.dbo.Distributer_Product' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="Distributer_Product">
+    <Key>
+      <PropertyRef Name="Name" />
+      <PropertyRef Name="Price" />
+      <PropertyRef Name="Type" />
+      <PropertyRef Name="Descripction" />
+    </Key>
+    <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Product_id" Type="nvarchar" MaxLength="50" />
+    <Property Name="Price" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="Type" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Descripction" Type="varchar(max)" Nullable="false" />
+    <Property Name="PANno" Type="nvarchar" MaxLength="50" />
+    <Property Name="Image" Type="varchar(max)" />
+    <Property Name="Quantity" Type="int" />
+  </EntityType>
+  <EntityType Name="distributerlogin">
+    <Key>
+      <PropertyRef Name="PANNo" />
+    </Key>
+    <Property Name="username" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="password" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="PANNo" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Status_Table">
+    <Key>
+      <PropertyRef Name="OrderID" />
+    </Key>
+    <Property Name="OrderPlacedDate" Type="date" Nullable="false" />
+    <Property Name="OrderID" Type="int" Nullable="false" />
+    <Property Name="ProductID" Type="int" Nullable="false" />
+    <Property Name="Type" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="ProductName" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Quantity" Type="int" Nullable="false" />
+    <Property Name="TotalCost" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="Status" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Wareproduct">
+    <Key>
+      <PropertyRef Name="Product_id" />
+    </Key>
+    <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Product_id" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Price" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="Type" Type="nchar" MaxLength="10" Nullable="false" />
+    <Property Name="Discription" Type="nvarchar" MaxLength="1000" Nullable="false" />
+    <Property Name="image" Type="varchar(max)" Nullable="false" />
+    <Property Name="Quantity" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="FK__distribut__PANNo__3A81B327">
+    <End Role="distributer profile" Type="Self.distributer profile" Multiplicity="1" />
+    <End Role="distributerlogin" Type="Self.distributerlogin" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="distributer profile">
+        <PropertyRef Name="PANNo" />
+      </Principal>
+      <Dependent Role="distributerlogin">
+        <PropertyRef Name="PANNo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Distribut__PANno__4E88ABD4">
+    <End Role="distributerlogin" Type="Self.distributerlogin" Multiplicity="0..1" />
+    <End Role="Distributer_Product" Type="Self.Distributer_Product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="distributerlogin">
+        <PropertyRef Name="PANNo" />
+      </Principal>
+      <Dependent Role="Distributer_Product">
+        <PropertyRef Name="PANno" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Distribut__Produ__4BAC3F29">
+    <End Role="Wareproduct" Type="Self.Wareproduct" Multiplicity="0..1" />
+    <End Role="Distributer_Product" Type="Self.Distributer_Product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Wareproduct">
+        <PropertyRef Name="Product_id" />
+      </Principal>
+      <Dependent Role="Distributer_Product">
+        <PropertyRef Name="Product_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="scorpioDBModelStoreContainer">
+    <EntitySet Name="distributer profile" EntityType="Self.distributer profile" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="distributerlogin" EntityType="Self.distributerlogin" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Status_Table" EntityType="Self.Status_Table" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Wareproduct" EntityType="Self.Wareproduct" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Distributer_Product" EntityType="Self.Distributer_Product" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+[Distributer_Product].[Name] AS [Name], 
+[Distributer_Product].[Product_id] AS [Product_id], 
+[Distributer_Product].[Price] AS [Price], 
+[Distributer_Product].[Type] AS [Type], 
+[Distributer_Product].[Descripction] AS [Descripction], 
+[Distributer_Product].[PANno] AS [PANno], 
+[Distributer_Product].[Image] AS [Image], 
+[Distributer_Product].[Quantity] AS [Quantity]
+FROM [dbo].[Distributer_Product] AS [Distributer_Product]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK__distribut__PANNo__3A81B327" Association="Self.FK__distribut__PANNo__3A81B327">
+      <End Role="distributer profile" EntitySet="distributer profile" />
+      <End Role="distributerlogin" EntitySet="distributerlogin" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Distribut__PANno__4E88ABD4" Association="Self.FK__Distribut__PANno__4E88ABD4">
+      <End Role="distributerlogin" EntitySet="distributerlogin" />
+      <End Role="Distributer_Product" EntitySet="Distributer_Product" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Distribut__Produ__4BAC3F29" Association="Self.FK__Distribut__Produ__4BAC3F29">
+      <End Role="Wareproduct" EntitySet="Wareproduct" />
+      <End Role="Distributer_Product" EntitySet="Distributer_Product" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
